@@ -1,6 +1,6 @@
 {
   "name": "PebbleVote",
-  "version": "1.0.0-2",
+  "version": "1.0.1",
   "description": "A simple voting application for Pebble",
   "main": "index.js",
   "scripts": {
