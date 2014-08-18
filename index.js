@@ -15,6 +15,7 @@ var app = express()
 app.listen(80)
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
 
 app.all('*', function(request, response, next) {
     response.setHeader('Content-Type', 'text/json')
