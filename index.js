@@ -18,6 +18,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
 app.all('*', function(request, response, next) {
+    response.header("Access-Control-Allow-Origin", "http://einfallstoll.github.io");
     response.setHeader('Content-Type', 'text/json')
     next()
 })
