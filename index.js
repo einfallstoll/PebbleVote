@@ -140,7 +140,7 @@ app.post('/random', function(request, response) {
         "or_user.user": { $ne: request.body.user },
         "report_user.user": { $ne: request.body.user },
         "skip_user.user": { $ne: request.body.user },
-        $where: "this.report.length < 10 || (this.report.length / (this.upvote.length + this.downvote.length + 1) < 0.05)"
+        $where: "this.report_user.length < 10 || (this.report_user.length / (this.either_user.length + this.or_user.length + 1) < 0.05)"
     }, {
         limit: 25,
         sort: 'timestamp'
