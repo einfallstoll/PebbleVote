@@ -131,11 +131,11 @@ Returns random questions to a specific language
 }
 */
 app.post('/random', function(request, response) {
-    var tenDaysAgo = parseInt(moment().subtract('10', 'days').format('X'))
+    var fiftyDaysAgo = parseInt(moment().subtract('50', 'days').format('X'))
     MongoFind({
         user: { $ne: request.body.user },
         language: request.body.language,
-        timestamp: { $gte: tenDaysAgo },
+        timestamp: { $gte: fiftyDaysAgo },
         "either_user.user": { $ne: request.body.user },
         "or_user.user": { $ne: request.body.user },
         "report_user.user": { $ne: request.body.user },
