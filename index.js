@@ -219,8 +219,8 @@ Adds a new question
 app.post('/question', function(request, response) {
     MongoInsert({
         user: request.body.user,
-        either: request.body.either,
-        or: request.body.or,
+        either: request.body.either.substr(0, 50),
+        or: request.body.or.substr(0, 50),
         language: request.body.language,
         timestamp: parseInt(moment().format('X')),
         either_user: [],
