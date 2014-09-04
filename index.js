@@ -1,6 +1,8 @@
+// node.js-modules
 var fs = require('fs')
 , path = require('path')
 
+// 3rd-party modules
 var _ = require('underscore')
 , bodyParser = require('body-parser')
 , express = require('express')
@@ -8,27 +10,32 @@ var _ = require('underscore')
 , MongoClient = require('mongodb').MongoClient
 , ObjectID = require('mongodb').ObjectID
 
+// read secret db-file
 var db = fs.readFileSync(path.join(__dirname, 'db.txt')).toString()
 
 var app = express()
 
 app.listen(80)
 
+// parse submitted POST-data
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
+// set response header for all responses
 app.all('*', function(request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://einfallstoll.github.io");
     response.setHeader('Content-Type', 'text/json')
     next()
 })
 
+// default index-page
 app.get('/', function(request, response) {
     response.end(JSON.stringify({
         status: 'PebbleVote API'
     }))
 })
 
+// wrapper for a simple search request with generic error handling
 function MongoFind(query, options, callback) {
     MongoClient.connect(db, function(error, db) {
         if (error) {
@@ -48,6 +55,7 @@ function MongoFind(query, options, callback) {
     })
 }
 
+// wrapper for a simple insert with generic error handling
 function MongoInsert(document, options, callback) {
     MongoClient.connect(db, function(error, db) {
         if (error) {
@@ -67,6 +75,7 @@ function MongoInsert(document, options, callback) {
     })
 }
 
+// wrapper for a simple update with generic error handling
 function MongoUpdate(document, options, moreoptions, callback) {
     MongoClient.connect(db, function(error, db) {
         if (error) {
@@ -123,7 +132,7 @@ app.post('/statistics', function(request, response) {
 
 
 /*
-Returns random questions to a specific language
+Returns random questions to a specific language (and newer than 50 days...)
 
 {
   user: UUID,
