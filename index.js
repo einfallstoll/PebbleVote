@@ -232,6 +232,7 @@ app.post('/question', function(request, response) {
         or: request.body.or.substr(0, 50),
         language: request.body.language,
         timestamp: parseInt(moment().format('X')),
+        timestamp_formatted: parseInt(moment().format('lll')),
         either_user: [],
         or_user: [],
         report_user: [],
