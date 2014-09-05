@@ -19,7 +19,7 @@ app.listen(80)
 
 // parse submitted POST-data
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended: true}))
 
 // set response header for all responses
 app.all('*', function(request, response, next) {
